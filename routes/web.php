@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,5 +16,17 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth.login');
 });
+
+
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Auth::routes();
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/libros', [App\Http\Controllers\LibroController::class, 'index'])->name('libros');
+Route::post('/agregar-al-carrito/{id}', [App\Http\Controllers\CarritoController::class, 'agregar'])->name('agregarAlCarrito');
+Route::get('/portada/{ruta}', [App\Http\Controllers\FotoController::class, 'mostrarPortada'])->name('mostrarPortada');
